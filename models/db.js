@@ -1,7 +1,20 @@
 const { Sequelize } = require('sequelize');
 const bcrypt = require('bcrypt');
 
-const sequelize = new Sequelize('postgres://postgres:5271@127.0.0.1:5432/urls'); // Example for postgres
+// const sequelize = new Sequelize('postgres://postgres:5271@127.0.0.1:5432/urls'); // Local database
+const sequelize = new Sequelize({
+  database: 'dfj7frahkcae9k',
+  username: 'ogighaslynkoep',
+  password: '0625ef9b305e7768c170ecab1b69a3e3f03450368adb1f08100d3465cd68ca5a',
+  host: 'ec2-44-205-41-76.compute-1.amazonaws.com',
+  dialect: 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  },
+})
 
 sequelize.authenticate().then( () => {
     console.log('Connection has been established successfully.');
@@ -36,7 +49,8 @@ const User = sequelize.define("user", {
     }
 
 });
-//
+
+// Database Synchronization
 // sequelize.sync().then( e => {
 //   console.log("database synced");
 // }).catch(e => {
